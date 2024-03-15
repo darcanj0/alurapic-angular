@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title: String = "O leao e o tigrinho"
-  photos: PhotoData[] = [
+  photos: Object[] = [
     new PhotoData(
       'https://th.bing.com/th/id/OIP.Xj_XB9KGp8Oon6kxGo69OgHaE-?rs=1&pid=ImgDetMain',
       'Leao',
@@ -20,8 +20,15 @@ export class AppComponent {
     )
   ];
 
-  constructor(private readonly client: HttpClient) {
+  constructor(client: HttpClient) {
     console.log(client);
-
+    client.get<any[]>('http://localhost:3000/flavio/photos')
+      .subscribe(res => {
+        console.log(res);
+        this.photos = [];
+        res.forEach(data => this.photos.push(
+          new PhotoData(data.url, data.description)
+        ))
+      });
   }
 }
