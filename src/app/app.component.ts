@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PhotoData } from './photos/model/photo';
 import { HttpClient } from '@angular/common/http';
+import { PhotoService } from './photos/service/photo.service';
 
 @Component({
   selector: 'app-root',
@@ -20,15 +21,16 @@ export class AppComponent {
     )
   ];
 
-  constructor(client: HttpClient) {
-    console.log(client);
-    client.get<any[]>('http://localhost:3000/flavio/photos')
+  constructor(private readonly photoService: PhotoService) {
+    this.photoService.getUserPhotos('flavio')
       .subscribe(res => {
         console.log(res);
         this.photos = [];
-        res.forEach(data => this.photos.push(
-          new PhotoData(data.url, data.description)
-        ))
-      });
+        res.forEach(photoData => {
+          this.photos.push(PhotoData.fromApi(photoData));
+        })
+      },
+        err => console.error(err.message)
+      );
   }
 }
