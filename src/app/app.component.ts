@@ -37,8 +37,8 @@ export class AppComponent {
     this.photoService.getUserPhotos('flavio')
       .subscribe(res => {
         this.photos = [];
-        res.forEach(photoData => {
-          this.photos.push(PhotoData.fromApi(photoData));
+        res.forEach(props => {
+          this.photos.push(PhotoData.fromApi(props));
         })
       },
         err => console.error(err.message)

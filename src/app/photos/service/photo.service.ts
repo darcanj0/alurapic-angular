@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { PhotoData, PhotoProps } from "../model/photo";
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
@@ -10,7 +11,7 @@ export class PhotoService {
 
   constructor(private client: HttpClient) { }
 
-  getUserPhotos(username: string): Observable<any[]> {
+  getUserPhotos(username: string): Observable<PhotoProps[]> {
     return this.client.get<any[]>(this.usernamePhotos(username));
   }
 }

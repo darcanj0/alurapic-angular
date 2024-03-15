@@ -1,4 +1,4 @@
-interface PhotoProps {
+export interface PhotoProps {
   url: string,
   description: string,
   readonly createdAt: Date,
