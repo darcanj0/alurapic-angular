@@ -1,10 +1,38 @@
+interface PhotoProps {
+  url: string,
+  description: string,
+  readonly createdAt: Date,
+  readonly id: string,
+  likes: number,
+  comments: number,
+  allowComments: boolean,
+  readonly authorId: string
+}
+
 export class PhotoData {
   constructor(
-    public readonly imageUrl: String,
-    public readonly description: String,
+    public props: PhotoProps
   ) { }
 
+  public get url(): string {
+    return this.props.url;
+  }
+
+  public get descruption(): string {
+    return this.props.description;
+  }
+
   static fromApi(obj: any): PhotoData {
-    return new PhotoData(obj.url, obj.description);
+    const model = new PhotoData({
+      id: obj.id,
+      authorId: obj.userId,
+      likes: obj.likes,
+      comments: obj.comments,
+      allowComments: obj.allowComments,
+      createdAt: new Date(),
+      description: obj.description,
+      url: obj.url
+    });
+    return model;
   }
 }

@@ -9,5 +9,5 @@ export class PhotoComponent {
   description: String = 'Lion';
 
   @Input()
-  imageUrl = 'https://th.bing.com/th/id/OIP.Xj_XB9KGp8Oon6kxGo69OgHaE-?rs=1&pid=ImgDetMain';
+  url = 'https://th.bing.com/th/id/OIP.Xj_XB9KGp8Oon6kxGo69OgHaE-?rs=1&pid=ImgDetMain';
 }
