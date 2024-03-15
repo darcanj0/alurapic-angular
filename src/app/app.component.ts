@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhotoData } from './photos/model/photo';
 import { PhotoService } from './photos/service/photo.service';
 
@@ -7,7 +7,7 @@ import { PhotoService } from './photos/service/photo.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: String = "O leao e o tigrinho"
   photos: PhotoData[] = [
     new PhotoData({
@@ -33,7 +33,9 @@ export class AppComponent {
     })
   ];
 
-  constructor(private readonly photoService: PhotoService) {
+  constructor(private readonly photoService: PhotoService) { }
+
+  ngOnInit(): void {
     this.photoService.getUserPhotos('flavio')
       .subscribe(res => {
         this.photos = [];
