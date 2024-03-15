@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { PhotosModule } from './photos/photos.module';
-import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     PhotosModule,
   ],
