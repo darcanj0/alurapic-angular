@@ -6,7 +6,7 @@ export interface PhotoProps {
   likes: number,
   comments: number,
   allowComments: boolean,
-  readonly authorId: string
+  readonly authorId: string;
 }
 
 export class PhotoData {
@@ -18,7 +18,7 @@ export class PhotoData {
     return this.props.url;
   }
 
-  public get descruption(): string {
+  public get description(): string {
     return this.props.description;
   }
 

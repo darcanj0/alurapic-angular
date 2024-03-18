@@ -34,6 +34,8 @@ export class PhotoListComponent implements OnInit {
     })
   ];
 
+  searchFilter: string = '';
+
   constructor(
     private readonly photoService: PhotoService,
     private activatedRoute: ActivatedRoute,
