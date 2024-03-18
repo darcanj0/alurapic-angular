@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { PhotoData, PhotoProps } from '../model/photo';
-import { PhotoService } from '../service/photo.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { PhotoData, PhotoProps } from '../model/photo';
 
 @Component({
   selector: 'ap-photo-list',
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css']
 })
-export class PhotoListComponent implements OnInit {
+export class PhotoListComponent implements OnInit, OnDestroy {
 
   photos: PhotoData[] = [
     // new PhotoData({
@@ -35,15 +36,24 @@ export class PhotoListComponent implements OnInit {
   ];
 
   searchFilter: string = '';
+  debounce: Subject<string> = new Subject<string>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
   ) { }
 
+  ngOnDestroy(): void {
+    this.debounce.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.activatedRoute.snapshot.data.photos.forEach(
       photoProps => this.photos.push(PhotoData.fromApi(photoProps as PhotoProps))
     );
+
+    this.debounce
+      .pipe(debounceTime(300))
+      .subscribe(filter => this.searchFilter = filter);
   }
 
 }
