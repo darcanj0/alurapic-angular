@@ -10,7 +10,7 @@ export class PhotoListResolver implements Resolve<Observable<PhotoProps[]>> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PhotoProps[]> | Observable<Observable<PhotoProps[]>> | Promise<Observable<PhotoProps[]>> {
     const username = route.params.username;
-    return this.service.getUserPhotos(username);
+    return this.service.getPaginatedUserPhotos(username, 1);
   }
 
 }
