@@ -6,6 +6,7 @@ import { FilterByDescriptionPipe } from './filter-by-description.pipe';
 import { CommonModule } from '@angular/common';
 import { PhotoModule } from '../photo/photo.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PhotosComponent,
     LoadButtonComponent,
     FilterByDescriptionPipe,
+    SearchComponent,
   ],
   imports: [CommonModule, PhotoModule, SharedModule,]
 })

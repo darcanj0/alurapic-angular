@@ -1,9 +1,5 @@
-<div class="text-center mt-3 mb-3">
-  <form>
-    <i class="fa fa-search mr-2" aria-hidden="true"></i>
-    <input type="search" class="rounded" placeholder="Search..." autofocus (keyup)="debounce.next($event.target.value)">
-  </form>
-</div>
+<ap-search (onSearching)="searchFilter = $event" [value]="searchFilter">
+</ap-search>
 
 <ap-photos [photos]="photos | filterByDescription : searchFilter">
 </ap-photos>

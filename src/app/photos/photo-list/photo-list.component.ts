@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { PhotoData, PhotoProps } from '../model/photo';
 import { PhotoService } from '../service/photo.service';
 
@@ -10,7 +8,7 @@ import { PhotoService } from '../service/photo.service';
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css']
 })
-export class PhotoListComponent implements OnInit, OnDestroy {
+export class PhotoListComponent implements OnInit {
 
   photos: PhotoData[] = [
     // new PhotoData({
@@ -40,6 +38,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
   username: string = '';
 
   loadMore() {
+    this.searchFilter = '';
     this.service.getPaginatedUserPhotos(this.username, ++this.currentPage)
       .subscribe(photosProps => {
         photosProps
@@ -50,16 +49,11 @@ export class PhotoListComponent implements OnInit, OnDestroy {
   }
 
   searchFilter: string = '';
-  debounce: Subject<string> = new Subject<string>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private readonly service: PhotoService,
   ) { }
-
-  ngOnDestroy(): void {
-    this.debounce.unsubscribe();
-  }
 
   ngOnInit(): void {
     this.username = this.activatedRoute.snapshot.params.username;
@@ -67,10 +61,6 @@ export class PhotoListComponent implements OnInit, OnDestroy {
     this.activatedRoute.snapshot.data.photos.forEach(
       photoProps => this.photos.push(PhotoData.fromApi(photoProps as PhotoProps))
     );
-
-    this.debounce
-      .pipe(debounceTime(300))
-      .subscribe(filter => this.searchFilter = filter);
   }
 
 }
