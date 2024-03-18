@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { PhotoModule } from '../photo/photo.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchComponent } from './search/search.component';
+import { SharedDirectivesModule } from 'src/app/shared/directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,11 @@ import { SearchComponent } from './search/search.component';
     FilterByDescriptionPipe,
     SearchComponent,
   ],
-  imports: [CommonModule, PhotoModule, SharedModule,]
+  imports: [
+    CommonModule,
+    PhotoModule,
+    SharedModule,
+    SharedDirectivesModule,
+  ]
 })
 export class PhotoListModule { }
