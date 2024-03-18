@@ -22,6 +22,14 @@ export class PhotoData {
     return this.props.description;
   }
 
+  public get likes(): number {
+    return this.props.likes;
+  }
+
+  public get comments(): number {
+    return this.props.comments;
+  }
+
   static fromApi(obj: any): PhotoData {
     const model = new PhotoData({
       id: obj.id,
