@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { PlatformDetectorService } from 'src/app/core/platform/platform-detector.service';
 
 @Component({
   templateUrl: './signin.component.html',
@@ -11,10 +12,14 @@ export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
 
+  @ViewChild('usernameInput')
+  usernameInput: ElementRef<HTMLInputElement>;
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private platformDetector: PlatformDetectorService,
   ) { }
 
   ngOnInit() {
@@ -36,7 +41,10 @@ export class SigninComponent implements OnInit {
       },
       err => {
         console.error(err);
+        alert('Invalid Credentials!');
         this.loginForm.reset();
+        this.platformDetector.isBrowser &&
+          this.usernameInput.nativeElement.focus();
       }
     );
 
