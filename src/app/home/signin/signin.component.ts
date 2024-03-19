@@ -43,8 +43,9 @@ export class SigninComponent implements OnInit {
         console.error(err);
         alert('Invalid Credentials!');
         this.loginForm.reset();
-        this.platformDetector.isBrowser &&
+        if (this.platformDetector.isBrowser()) {
           this.usernameInput.nativeElement.focus();
+        }
       }
     );
 
