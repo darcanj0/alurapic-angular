@@ -2,11 +2,12 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { PhotoProps } from "../model/photo";
+import EnvVariables from 'src/app/config/http';
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
   private usernamePhotos(username: string): string {
-    return `http://localhost:3000/${username}/photos`;
+    return `${EnvVariables.API_BASE_URL}${username}/photos`;
   }
 
   constructor(private client: HttpClient) { }
