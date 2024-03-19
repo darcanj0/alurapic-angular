@@ -28,6 +28,11 @@ export class AuthService {
     return this.userSubject.asObservable();
   }
 
+  signout() {
+    this.tokenService.removeToken();
+    this.userSubject.next(null);
+  }
+
   private userSubject = new BehaviorSubject<CurrentUser>(null);
 
   private decodeAndNotify() {
