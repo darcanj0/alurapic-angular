@@ -21,6 +21,6 @@ export class HeaderComponent {
     private readonly authService: AuthService,
     private router: Router,
   ) {
-    this.user$ = this.authService.getCurrentUser();
+    this.user$ = this.authService.userChanges();
   }
 }

@@ -24,13 +24,26 @@ export class AuthService {
       }));
   }
 
-  getCurrentUser(): Observable<CurrentUser> {
+
+
+  userChanges(): Observable<CurrentUser> {
     return this.userSubject.asObservable();
   }
 
   signout() {
     this.tokenService.removeToken();
     this.userSubject.next(null);
+    this.username = null;
+  }
+
+  isSigned() {
+    return !!this.tokenService.getToken();
+  }
+
+  username: string;
+
+  getUsername() {
+    return this.username;
   }
 
   private userSubject = new BehaviorSubject<CurrentUser>(null);
@@ -38,6 +51,7 @@ export class AuthService {
   private decodeAndNotify() {
     const currentUser = this.tokenService.decodeToken();
     this.userSubject.next(currentUser);
+    this.username = currentUser.name;
   }
 
   constructor(
