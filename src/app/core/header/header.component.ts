@@ -10,12 +10,10 @@ import { CurrentUser } from '../auth/user';
 export class HeaderComponent {
 
   user$: Observable<CurrentUser>;
-  currentUser: CurrentUser;
 
   constructor(
     private readonly authService: AuthService,
   ) {
-    this.user$ = authService.getCurrentUser();
-    this.user$.subscribe(user => this.currentUser = user);
+    this.user$ = this.authService.getCurrentUser();
   }
 }

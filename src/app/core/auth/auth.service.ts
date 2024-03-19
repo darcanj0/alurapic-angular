@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import EnvVariables from '../../config/http';
 import { tap } from 'rxjs/operators';
 import { TokenService } from './token.service';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CurrentUser } from './user';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class AuthService {
     return this.userSubject.asObservable();
   }
 
-  private userSubject = new Subject<CurrentUser>();
+  private userSubject = new BehaviorSubject<CurrentUser>(null);
 
   private decodeAndNotify() {
     const currentUser = this.tokenService.decodeToken();
