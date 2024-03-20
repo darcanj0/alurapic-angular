@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
 import { UsernameValidator as UsernameValidatorService } from './validators/username.validator.service';
 import { NewUser, SignupService } from './services/signup.service';
 import { Router } from '@angular/router';
+import { PlatformDetectorService } from 'src/app/core/platform/platform-detector.service';
 
 @Component({
   templateUrl: './signup.component.html',
@@ -13,12 +14,20 @@ export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
 
+  @ViewChild('emailInput')
+  emailInput: ElementRef<HTMLInputElement>;
+
   signup() {
     const newUser = this.signupForm.getRawValue() as NewUser;
     this.signupService.signup(newUser)
       .subscribe(
         () => this.router.navigate(['']),
-        (err) => console.error(err)
+        (err) => {
+          console.error(err);
+          if (this.platformDetector.isBrowser()) {
+            this.emailInput.nativeElement.focus();
+          }
+        }
       );
   }
 
@@ -26,7 +35,8 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private readonly usernameValidator: UsernameValidatorService,
     private readonly signupService: SignupService,
-    private router: Router
+    private router: Router,
+    private platformDetector: PlatformDetectorService,
   ) { }
 
   ngOnInit() {
@@ -57,6 +67,9 @@ export class SignupComponent implements OnInit {
         Validators.maxLength(14)
       ]],
     });
+    if (this.platformDetector.isBrowser()) {
+      this.emailInput.nativeElement.focus();
+    }
   }
 
 }
