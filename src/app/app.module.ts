@@ -2,25 +2,23 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { PhotosModule } from './photos/photos.module';
 import { AppRoutingModule } from './app.routing';
-import { ErrorsModule } from './errors/errors.module';
-import { SharedModule } from './shared/shared.module';
-import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
+import { ErrorsModule } from './errors/errors.module';
+import { PhotosModule } from './photos/photos.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     PhotosModule,
     ErrorsModule,
     SharedModule,
-    HomeModule,
     CoreModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { SigninComponent } from './signin/signin.component';
 import { CoreModule } from '../core/core.module';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
+import { HomeRoutingModule } from './home.routing';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     VMessageModule,
     RouterModule,
-    CoreModule
+    CoreModule,
+    HomeRoutingModule
   ],
   declarations: [SigninComponent, SignupComponent, HomeComponent]
 })
