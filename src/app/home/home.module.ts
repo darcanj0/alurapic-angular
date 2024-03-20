@@ -8,6 +8,8 @@ import { CoreModule } from '../core/core.module';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { HomeRoutingModule } from './home.routing';
+import { SignupService } from './signup/services/signup.service';
+import { UsernameValidator } from './signup/validators/username.validator.service';
 
 @NgModule({
   imports: [
@@ -18,6 +20,13 @@ import { HomeRoutingModule } from './home.routing';
     CoreModule,
     HomeRoutingModule
   ],
-  declarations: [SigninComponent, SignupComponent, HomeComponent]
+  declarations: [SigninComponent,
+    SignupComponent,
+    HomeComponent,
+  ],
+  providers: [
+    SignupService,
+    UsernameValidator,
+  ]
 })
 export class HomeModule { }

@@ -8,7 +8,8 @@ import { PlatformDetectorService } from 'src/app/core/platform/platform-detector
 
 @Component({
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers: [SignupService, UsernameValidatorService],
 })
 export class SignupComponent implements OnInit {
 

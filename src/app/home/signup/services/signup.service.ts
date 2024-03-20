@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import EnvVariables from 'src/app/config/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SignupService {
 
   checkUsernameTaken(username: string) {
