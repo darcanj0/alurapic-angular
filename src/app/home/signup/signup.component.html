@@ -25,6 +25,9 @@
       text="Username is too long (30 charac at max)"></ap-vmessage>
     <ap-vmessage *ngIf="signupForm.get('username').errors?.lowerCase"
       text="Username must start with lower case letter"></ap-vmessage>
+    <ap-vmessage *ngIf="signupForm.get('username').errors?.usernameTaken"
+      text="Username is already taken"></ap-vmessage>
+    <small *ngIf="signupForm.get('username').valid" class="text-success">Username avaliable</small>
   </div>
 
   <div class="form-group">
@@ -36,7 +39,7 @@
       text="Password is too long (14 charac at max)"></ap-vmessage>
   </div>
 
-  <button class="btn btn-primary btn-block">Register</button>
+  <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block">Register</button>
 
   <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
 </form>
