@@ -11,5 +11,19 @@ export class SignupService {
     return this.client.get(EnvVariables.API_BASE_URL + 'user/exists/' + username);
   }
 
+  signup(user: NewUser) {
+    return this.client.post(EnvVariables.API_BASE_URL + 'user/signup',
+      { ...user, userName: user.username }
+    );
+  }
+
   constructor(private readonly client: HttpClient) { }
 }
+
+export interface NewUser {
+  username: string;
+  email: string;
+  fullName: string;
+  password: string;
+}
+

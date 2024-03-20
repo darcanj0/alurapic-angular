@@ -39,7 +39,8 @@
       text="Password is too long (14 charac at max)"></ap-vmessage>
   </div>
 
-  <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block">Register</button>
+  <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block"
+    (click)="signup()">Register</button>
 
   <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
 </form>
