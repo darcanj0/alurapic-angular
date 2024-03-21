@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { DarkenOnHoverDirective } from './darken-on-hover.directive';
+import { ImmediateClickDirective } from './immediate-click.directive';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
+  imports: [CommonModule],
   declarations: [
-    DarkenOnHoverDirective
+    DarkenOnHoverDirective,
+    ImmediateClickDirective,
   ],
   exports: [
-    DarkenOnHoverDirective
+    DarkenOnHoverDirective,
+    ImmediateClickDirective,
   ],
 })
 export class SharedDirectivesModule { }

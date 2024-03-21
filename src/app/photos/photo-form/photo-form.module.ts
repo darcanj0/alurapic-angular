@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VMessageModule } from 'src/app/shared/components/vmessage/vmessage.module';
 import { RouterModule } from '@angular/router';
 import { PhotoModule } from '../photo/photo.module';
+import { SharedDirectivesModule } from 'src/app/shared/directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PhotoModule } from '../photo/photo.module';
     VMessageModule,
     RouterModule,
     PhotoModule,
+    SharedDirectivesModule
   ]
 })
 export class PhotoFormModule { }
