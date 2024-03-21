@@ -9,9 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./photo-form.component.css']
 })
 export class PhotoFormComponent implements OnInit {
+  handleFile(file: File) {
+    this.file = file;
+    const reader = new FileReader();
+    reader.onload = (event: any) => this.preview = event.target.result;
+    reader.readAsDataURL(file);
+  }
 
   photoForm: FormGroup;
   file: File;
+  preview: string;
 
   upload() {
     const metadata = this.photoForm.getRawValue();
