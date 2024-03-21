@@ -10,7 +10,9 @@ export class PhotoService {
     return `${EnvVariables.API_BASE_URL}${username}/photos`;
   }
 
-  constructor(private client: HttpClient) { }
+  constructor(
+    private client: HttpClient,
+  ) { }
 
   getUserPhotos(username: string): Observable<PhotoProps[]> {
     return this.client.get<any[]>(this.usernamePhotos(username));
@@ -20,6 +22,17 @@ export class PhotoService {
     const params = new HttpParams().append('page', page.toString());
     return this.client.get<any[]>(this.usernamePhotos(username),
       { params }
+    );
+  }
+
+  upload(description: string, allowComments: boolean, file: File) {
+    const formData = new FormData();
+    formData.append('description', description);
+    formData.append('allowComments', allowComments ? 'true' : 'false');
+    formData.append('imageFile', file);
+    return this.client.post(
+      EnvVariables.API_BASE_URL + 'photos/upload',
+      formData
     );
   }
 }
