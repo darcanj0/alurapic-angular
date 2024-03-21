@@ -46,6 +46,7 @@ export class PhotoListComponent implements OnInit {
           .forEach(data => this.photos = [...this.photos, data]);
         if (!photosProps.length) this.hasMore = false;
       });
+    console.log(this.photos);
   }
 
   searchFilter: string = '';

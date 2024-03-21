@@ -2,7 +2,7 @@ export interface PhotoProps {
   url: string,
   description: string,
   readonly createdAt: Date,
-  readonly id: string,
+  readonly id: number,
   likes: number,
   comments: number,
   allowComments: boolean,
@@ -28,6 +28,10 @@ export class PhotoData {
 
   public get comments(): number {
     return this.props.comments;
+  }
+
+  public get id(): number {
+    return this.props.id;
   }
 
   static fromApi(obj: any): PhotoData {

@@ -18,7 +18,6 @@ export class PhotoComponent {
   @Input()
   public set url(value) {
     const notDataUri = !value.startsWith('data');
-    console.log(notDataUri);
     if (notDataUri) {
       this._url = EnvVariables.API_BASE_URL + 'imgs/' + value;
     } else {

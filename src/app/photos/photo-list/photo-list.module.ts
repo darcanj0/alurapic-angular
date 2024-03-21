@@ -8,6 +8,7 @@ import { PhotoModule } from '../photo/photo.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchComponent } from './search/search.component';
 import { SharedDirectivesModule } from 'src/app/shared/directives/directives.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SharedDirectivesModule } from 'src/app/shared/directives/directives.mod
     PhotoModule,
     SharedModule,
     SharedDirectivesModule,
+    RouterModule,
   ]
 })
 export class PhotoListModule { }

@@ -5,18 +5,20 @@
 <ol class="list-unstyled">
   <li *ngFor="let cols of rows" class="row no-gutters">
     <div *ngFor="let photo of cols" class="col-4" apDarkenOnHover>
-      <ap-photo-card [title]="photo.description">
-        <ap-photo [url]="photo.url" [description]="photo.description">
-        </ap-photo>
-        <div class="text-start p-1">
-          <i class="fa fa-heart-o fa-1x mr-1 ml-1" aria-hidden="true">
-            {{photo.likes}}
-          </i>
-          <i class="fa fa-comment-o fa-1x mr-2 ml-2" aria-hidden="true">
-            {{photo.comments}}
-          </i>
-        </div>
-      </ap-photo-card>
+      <a [routerLink]="['/p', photo.id]">
+        <ap-photo-card [title]="photo.description">
+          <ap-photo [url]="photo.url" [description]="photo.description">
+          </ap-photo>
+          <div class="text-start p-1">
+            <i class="fa fa-heart-o fa-1x mr-1 ml-1" aria-hidden="true">
+              {{photo.likes}}
+            </i>
+            <i class="fa fa-comment-o fa-1x mr-2 ml-2" aria-hidden="true">
+              {{photo.comments}}
+            </i>
+          </div>
+        </ap-photo-card>
+      </a>
     </div>
   </li>
 </ol>

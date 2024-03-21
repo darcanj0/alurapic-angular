@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { PhotoProps } from "../model/photo";
+import { PhotoData, PhotoProps } from "../model/photo";
 import EnvVariables from 'src/app/config/http';
 
 @Injectable({ providedIn: 'root' })
@@ -34,5 +34,9 @@ export class PhotoService {
       EnvVariables.API_BASE_URL + 'photos/upload',
       formData
     );
+  }
+
+  findById(photoId: string): Observable<PhotoProps> {
+    return this.client.get<any>(EnvVariables.API_BASE_URL + 'photos/' + photoId);
   }
 }
