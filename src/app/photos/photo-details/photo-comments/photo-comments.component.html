@@ -10,11 +10,11 @@
   </ul>
 
   <div class="mt-4">
-    <form>
+    <form [formGroup]="commentForm" (submit)="saveComment()">
       <div class="input-group">
-        <textarea class="form-control"></textarea>
+        <textarea formControlName="comment" class="form-control"></textarea>
         <div class="input-group-append">
-          <button class="btn btn-primary pull-left">Publish</button>
+          <button [disabled]="commentForm.invalid" class="btn btn-primary pull-left">Publish</button>
         </div>
       </div>
     </form>

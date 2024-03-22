@@ -37,10 +37,16 @@ export class PhotoService {
   }
 
   findById(photoId: number): Observable<PhotoProps> {
-    return this.client.get<any>(EnvVariables.API_BASE_URL + 'photos/' + photoId);
+    return this.client.get<any>(`${EnvVariables.API_BASE_URL}photos/${photoId}`);
   }
 
   getPhotoComments(photoId: number) {
-    return this.client.get<Comment[]>(EnvVariables.API_BASE_URL + 'photos/' + photoId + '/comments');
+    return this.client.get<Comment[]>(`${EnvVariables.API_BASE_URL}photos/${photoId}/comments`);
+  }
+
+  addComment(photoId: number, comment: string) {
+    return this.client.post(`${EnvVariables.API_BASE_URL}photos/${photoId}/comments`, {
+      commentText: comment,
+    });
   }
 }

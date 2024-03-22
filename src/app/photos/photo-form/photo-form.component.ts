@@ -4,7 +4,7 @@ import { PhotoService } from '../service/photo.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-photo-form',
+  selector: 'ap-photo-form',
   templateUrl: './photo-form.component.html',
   styleUrls: ['./photo-form.component.css']
 })
@@ -48,6 +48,7 @@ export class PhotoFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('criou');
   }
 
 }
