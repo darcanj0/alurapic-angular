@@ -57,11 +57,13 @@ export class PhotoListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.username = this.activatedRoute.snapshot.params.username;
+    this.activatedRoute.params.subscribe((params) => {
+      this.username = params.username;
+      this.activatedRoute.snapshot.data.photos.forEach(
+        photoProps => this.photos.push(PhotoData.fromApi(photoProps as PhotoProps))
+      );
+    });
 
-    this.activatedRoute.snapshot.data.photos.forEach(
-      photoProps => this.photos.push(PhotoData.fromApi(photoProps as PhotoProps))
-    );
   }
 
 }
