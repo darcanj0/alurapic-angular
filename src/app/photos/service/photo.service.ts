@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { PhotoData, PhotoProps } from "../model/photo";
+import { Observable, of, throwError } from "rxjs";
+import { catchError, map } from 'rxjs/operators';
 import EnvVariables from 'src/app/config/http';
+import { PhotoProps } from "../model/photo";
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
@@ -48,6 +49,20 @@ export class PhotoService {
     return this.client.post(`${EnvVariables.API_BASE_URL}photos/${photoId}/comments`, {
       commentText: comment,
     });
+  }
+
+  like(photoId: number) {
+    return this.client.post(`${EnvVariables.API_BASE_URL}photos/${photoId}/like`, {}, { observe: 'response' })
+      .pipe(
+        map(res => true)
+      )
+      .pipe(
+        catchError(
+          err => {
+            return err.status == '304' ? of(false) : throwError(err);
+          }
+        )
+      );
   }
 
   deletePhoto(photoId: number) {
