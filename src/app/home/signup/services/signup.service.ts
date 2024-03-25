@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import EnvVariables from 'src/app/config/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class SignupService {
 
   checkUsernameTaken(username: string) {
-    return this.client.get(EnvVariables.API_BASE_URL + 'user/exists/' + username);
+    return this.client.get(environment.API_BASE_URL + 'user/exists/' + username);
   }
 
   signup(user: NewUser) {
-    return this.client.post(EnvVariables.API_BASE_URL + 'user/signup',
+    return this.client.post(environment.API_BASE_URL + 'user/signup',
       { ...user, userName: user.username }
     );
   }

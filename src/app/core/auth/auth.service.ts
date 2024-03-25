@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import EnvVariables from '../../config/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { TokenService } from './token.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { CurrentUser } from './user';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { CurrentUser } from './user';
 export class AuthService {
 
   signin(username: string, password: string) {
-    return this.client.post(EnvVariables.API_BASE_URL + 'user/login', {
+    return this.client.post(environment.API_BASE_URL + 'user/login', {
       userName: username, password
     }, { observe: 'response' },
     )

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import EnvVariables from 'src/app/config/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'ap-photo',
@@ -19,7 +19,7 @@ export class PhotoComponent {
   public set url(value) {
     const notDataUri = !value.startsWith('data');
     if (notDataUri) {
-      this._url = EnvVariables.API_BASE_URL + 'imgs/' + value;
+      this._url = environment.API_BASE_URL + 'imgs/' + value;
     } else {
       this._url = value;
     }
