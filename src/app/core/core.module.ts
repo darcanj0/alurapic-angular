@@ -5,10 +5,12 @@ import { RouterModule } from '@angular/router';
 import { RequestInterceptorService } from './auth/request-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
+import { NotificationModule } from '../shared/components/notification/notification.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    NotificationModule,
     RouterModule,
   ],
   declarations: [
