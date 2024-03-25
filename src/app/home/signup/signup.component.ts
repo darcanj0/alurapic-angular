@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
-import { UsernameValidator as UsernameValidatorService } from './validators/username.validator.service';
-import { NewUser, SignupService } from './services/signup.service';
 import { Router } from '@angular/router';
 import { PlatformDetectorService } from 'src/app/core/platform/platform-detector.service';
+import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
+import { NewUser, SignupService } from './services/signup.service';
+import { UsernameValidator as UsernameValidatorService } from './validators/username.validator.service';
 
 @Component({
   templateUrl: './signup.component.html',

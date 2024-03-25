@@ -20,13 +20,27 @@ const routes: Routes = [
     path: 'user/:username',
     component: PhotoListComponent,
     resolve: { photos: PhotoListResolver },
+    data: {
+      title: 'Timeline'
+    }
   },
   {
     path: 'photo/:photoId',
-    component: PhotoDetailsComponent
+    component: PhotoDetailsComponent,
+    data: {
+      title: 'Photo details'
+    }
   },
-  { path: 'p/add', component: PhotoFormComponent },
-  { path: 'not-found', component: NotFoundComponent },
+  {
+    path: 'p/add', component: PhotoFormComponent, data: {
+      title: 'Upload'
+    }
+  },
+  {
+    path: 'not-found', component: NotFoundComponent, data: {
+      title: 'Not Found'
+    }
+  },
   { path: '**', redirectTo: 'not-found' }
 ];
 
