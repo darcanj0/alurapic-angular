@@ -49,4 +49,8 @@ export class PhotoService {
       commentText: comment,
     });
   }
+
+  deletePhoto(photoId: number) {
+    return this.client.delete(EnvVariables.API_BASE_URL + 'photos/' + photoId);
+  }
 }

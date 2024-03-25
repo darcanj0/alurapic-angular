@@ -6,7 +6,7 @@ export interface PhotoProps {
   likes: number,
   comments: number,
   allowComments: boolean,
-  readonly authorId: string;
+  readonly userId: number;
 }
 
 export class PhotoData {
@@ -37,7 +37,7 @@ export class PhotoData {
   static fromApi(obj: any): PhotoData {
     const model = new PhotoData({
       id: obj.id,
-      authorId: obj.userId,
+      userId: obj.userId,
       likes: obj.likes,
       comments: obj.comments,
       allowComments: obj.allowComments,
