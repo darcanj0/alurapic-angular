@@ -5,6 +5,7 @@ import { PhotoProps } from '../model/photo';
 import { PhotoService } from '../service/photo.service';
 import { NotificationService } from 'src/app/shared/components/notification/notification.service';
 import { Notification } from 'src/app/shared/components/notification/notification';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
   templateUrl: './photo-details.component.html',
@@ -22,6 +23,7 @@ export class PhotoDetailsComponent implements OnInit {
     private readonly photoService: PhotoService,
     private router: Router,
     private notificationService: NotificationService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class PhotoDetailsComponent implements OnInit {
     this.photoService.deletePhoto(this.photoId)
       .subscribe(() => {
         this.notificationService.notify(Notification.success('Photo removed'));
-        this.router.navigate(['']);
+        this.router.navigate(['/user', this.authService.getUsername()]);
       },
         err => {
           console.error(err);

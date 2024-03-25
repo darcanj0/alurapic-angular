@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PhotoService } from '../service/photo.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/shared/components/notification/notification.service';
+import { Notification } from 'src/app/shared/components/notification/notification';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
   selector: 'ap-photo-form',
@@ -27,7 +30,10 @@ export class PhotoFormComponent implements OnInit {
       metadata.allowComments,
       this.file
     ).subscribe(
-      () => this.router.navigate([''])
+      () => {
+        this.router.navigate(['/user', this.authService.getUsername()]);
+        this.notificationService.notify(Notification.success('Uploaded successfully'));
+      }
     );
   }
 
@@ -35,6 +41,8 @@ export class PhotoFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private readonly photoService: PhotoService,
     private router: Router,
+    private readonly notificationService: NotificationService,
+    private readonly authService: AuthService,
   ) {
     this.photoForm = this.formBuilder.group({
       file: ['', Validators.required],
