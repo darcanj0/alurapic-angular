@@ -1,0 +1,7 @@
+<div [ngClass]="{ 'active-menu': show}">
+  <div class="menu-bar">
+    <i class="fa fa-window-close" (click)="toggleShow()"></i>
+    <ng-content></ng-content>
+  </div>
+  <div class="overlay" (click)="toggleShow()"></div>
+</div>
