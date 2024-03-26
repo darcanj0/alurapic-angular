@@ -33,7 +33,8 @@ export class PhotoService {
     formData.append('imageFile', file);
     return this.client.post(
       environment.API_BASE_URL + 'photos/upload',
-      formData
+      formData,
+      { observe: 'events', reportProgress: true }
     );
   }
 

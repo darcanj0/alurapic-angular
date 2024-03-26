@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/components/notification/notification.service';
 import { Notification } from 'src/app/shared/components/notification/notification';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'ap-photo-form',
@@ -22,6 +24,7 @@ export class PhotoFormComponent implements OnInit {
   photoForm: FormGroup;
   file: File;
   preview: string;
+  percentDone = 0;
 
   upload() {
     const metadata = this.photoForm.getRawValue();
@@ -29,12 +32,24 @@ export class PhotoFormComponent implements OnInit {
       metadata.description,
       metadata.allowComments,
       this.file
-    ).subscribe(
-      () => {
-        this.router.navigate(['/user', this.authService.getUsername()]);
-        this.notificationService.notify(Notification.success('Uploaded successfully'));
-      }
-    );
+    ).pipe(
+      finalize(
+        () => this.router.navigate(['/user', this.authService.getUsername()])
+      )
+    )
+      .subscribe(
+        (event: HttpEvent<any>) => {
+          if (event.type == HttpEventType.UploadProgress) {
+            this.percentDone = Math.round(100 * event.loaded / event.total);
+          } else if (event.type == HttpEventType.Response) {
+            this.notificationService.notify(Notification.success('Uploaded successfully'));
+          }
+        },
+        err => {
+          console.error(err);
+          this.notificationService.notify(Notification.danger('Upload Error!'), true);
+        }
+      );
   }
 
   constructor(
