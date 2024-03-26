@@ -27,6 +27,7 @@ export class PhotoDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.authService
     this.photoId = this.route.snapshot.params.photoId;
     this.photo$ = this.photoService.findById(this.photoId);
     this.comments$ = this.photoService.getPhotoComments(this.photoId);
@@ -49,7 +50,10 @@ export class PhotoDetailsComponent implements OnInit {
     this.photoService.deletePhoto(this.photoId)
       .subscribe(() => {
         this.notificationService.notify(Notification.success('Photo removed'));
-        this.router.navigate(['/user', this.authService.getUsername()]);
+        this.router.navigate(['/user', this.authService.getUsername()],
+          {
+            replaceUrl: true
+          });
       },
         err => {
           console.error(err);
