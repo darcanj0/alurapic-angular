@@ -5,6 +5,7 @@ import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
+import { GlobalErrorComponent } from './errors/global-error/global-error.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,12 @@ const routes: Routes = [
   {
     path: 'p/add', component: PhotoFormComponent, data: {
       title: 'Upload'
+    }
+  },
+  {
+    path: 'error', component: GlobalErrorComponent,
+    data: {
+      title: 'Error'
     }
   },
   {

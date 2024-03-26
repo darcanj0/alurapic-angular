@@ -3,6 +3,8 @@ import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import * as Tracer from 'stacktrace-js';
 import { LogServerClient } from './log-server-client';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
@@ -11,23 +13,26 @@ export class GlobalErrorHandler implements ErrorHandler {
   ) { }
 
   handleError(error: any): void {
-    const logServerClient = this.injector.get(LogServerClient);
+    const router = this.injector.get(Router);
 
-    const location = this.injector.get(LocationStrategy);
-    const url = location instanceof PathLocationStrategy
-      ? location.path()
-      : '';
+    environment.production && router.navigate(['/error']);
 
-    const authService = this.injector.get(AuthService);
-    const user = authService.getUsername();
-
-
-    const message = error.message ? error.message : error.toString();
     Tracer.fromError(error)
       .then(stackFrames => {
+        const message = error.message ? error.message : error.toString();
         const stackAsString = stackFrames.map(st => st.toString()).join('\n');
         console.error(message);
         console.error(stackAsString);
+
+        const logServerClient = this.injector.get(LogServerClient);
+
+        const location = this.injector.get(LocationStrategy);
+        const url = location instanceof PathLocationStrategy
+          ? location.path()
+          : '';
+
+        const authService = this.injector.get(AuthService);
+        const user = authService.getUsername();
 
         logServerClient.log({
           message, url, stack: stackAsString, userName: user
