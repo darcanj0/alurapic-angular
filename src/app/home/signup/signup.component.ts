@@ -5,6 +5,7 @@ import { PlatformDetectorService } from 'src/app/core/platform/platform-detector
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
 import { NewUser, SignupService } from './services/signup.service';
 import { UsernameValidator as UsernameValidatorService } from './validators/username.validator.service';
+import { usernamePasswordValidator } from './validators/username-password.validator';
 
 @Component({
   templateUrl: './signup.component.html',
@@ -69,7 +70,7 @@ export class SignupComponent implements OnInit {
         Validators.minLength(8),
         Validators.maxLength(14)
       ]],
-    });
+    }, { validator: usernamePasswordValidator });
     if (this.platformDetector.isBrowser()) {
       this.emailInput.nativeElement.focus();
     }

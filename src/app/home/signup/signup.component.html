@@ -41,6 +41,8 @@
       text="Password is too short (8 charac at least)"></ap-vmessage>
     <ap-vmessage *ngIf="signupForm.get('password').errors?.maxlength && form.submitted"
       text="Password is too long (14 charac at max)"></ap-vmessage>
+    <ap-vmessage *ngIf="signupForm.errors?.usernamePassword"
+      text="Password and username must be different"></ap-vmessage>
   </div>
 
   <button class="btn btn-primary btn-block" (click)="signup()">Register</button>
