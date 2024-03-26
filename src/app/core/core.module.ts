@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NotificationModule } from '../shared/components/notification/notification.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import { MenuModule } from '../shared/components/menu/menu.module';
+import { SharedDirectivesModule } from '../shared/directives/directives.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MenuModule } from '../shared/components/menu/menu.module';
     NotificationModule,
     LoadingModule,
     MenuModule,
+    SharedDirectivesModule,
     RouterModule,
   ],
   declarations: [

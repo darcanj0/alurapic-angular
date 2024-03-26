@@ -1,13 +1,14 @@
 <header class="fixed-top">
   <nav class="navbar-light navbar bg-white">
     <a class="navbar-brand">
-      <i (click)="menu.toggleShow()" class="fa fa-bars mr-2">
+      <i tabindex="0" (keyup.space)="menu.toggleShow()" (click)="menu.toggleShow()" class="fa fa-bars mr-2">
       </i>
       ALURAPIC
     </a>
 
     <ap-menu #menu>
-      <ul>
+      <ul class="list-unstyled">
+        <a signedin-only [routerLink]="['p', 'add']">Upload</a>
         <li>Item 1</li>
         <li>Item 2</li>
         <li>Item 3</li>
