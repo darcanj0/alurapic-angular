@@ -19,17 +19,19 @@ export class SignupComponent implements OnInit {
   emailInput: ElementRef<HTMLInputElement>;
 
   signup() {
-    const newUser = this.signupForm.getRawValue() as NewUser;
-    this.signupService.signup(newUser)
-      .subscribe(
-        () => this.router.navigate(['']),
-        (err) => {
-          console.error(err);
-          if (this.platformDetector.isBrowser()) {
-            this.emailInput.nativeElement.focus();
+    if (!this.signupForm.invalid && !this.signupForm.pending) {
+      const newUser = this.signupForm.getRawValue() as NewUser;
+      this.signupService.signup(newUser)
+        .subscribe(
+          () => this.router.navigate(['']),
+          (err) => {
+            console.error(err);
+            if (this.platformDetector.isBrowser()) {
+              this.emailInput.nativeElement.focus();
+            }
           }
-        }
-      );
+        );
+    }
   }
 
   constructor(
